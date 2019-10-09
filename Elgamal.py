@@ -1,10 +1,10 @@
-import math
+from math import pow
 z=16
 class signAlgo :
     def __init__(self,a,b,c,d):
         self.p=a
         self.alpha=b
-        self.beta=(self.alpha**z)%self.p
+        self.beta=(pow(alpha,z)%self.p
         self.m=c
         self.k=d
         self.r=self.createR(self.alpha,self.k)

@@ -6,3 +6,58 @@ Digital signatures serve the same role as traditional pen and ink signatures to 
 There is also the concept of a ‘blind signature’ where the signatory is able to sign a document without seeing its content thereby ensuring sender privacy. This is useful in electronic voting systems for endorsing that a vote was made legally without acquiring knowledge of how the vote was cast. Blind signatures are also used in applications of digital cash and cryptocurrencies.
 
 A good digital signature will be impossible to forge, quick to compute and verify and widely applicable. We will consider several digital signature schemes as well as engage in discussion of generalized attacks such as birthday attacks. Note that attacks of this kind are not interested in decrypting messages (which under signature schemes are often already public) but are interested in forging or changing signatures.
+## Signing protocol
+The signing protocol for an ElGamal signature is as follows. Suppose Alice wants to sign a message, m.
+
+The initial setup is the same as that for ElGamal encryption.
+
+1. Alice chooses a large prime p and a primitive root α.
+2. She then chooses a secret integer z and calculates β ≡ αz (mod p).
+3. The values of p, α and β are made public and z is kept private.
+
+In order to sign the message m Alice follows the steps below:
+
+1. She selects a secret random integer k such that GCD(k, p – 1) = 1.
+2. She then computes r ≡ αk (mod p).
+3. She then finally computes s ≡ k-1(m – zr) (mod p – 1).
+4. The signed message is the triplet (m, r, s).
+
+The verification process can then be performed by Bob using public information only.
+
+1. Bob computes v1 ≡ (β^r)*(r^s) (mod p) and v2 ≡ (α^m) (mod p).
+2. The signature is declared valid if and only if v1 ≡ v2 (mod p).
+### Correctness
+The verification procedure works by the following argument. Assume that the signature is valid. As s ≡ k-1(m – zr) (mod p – 1), we have sk ≡ (m – zr) (mod p – 1) and hence m ≡ sk + zr (mod p – 1). Therefore by Fermat’s little theorem, that a congruence mod p – 1 in the exponent yields a congruence mod p overall, we have:
+
+v
+2
+≡
+α
+m
+≡
+α
+s
+k
++
+z
+r
+≡
+α
+s
+k
+×
+α
+z
+r
+≡
+β
+r
+r
+s
+≡
+v
+1
+(
+mod
+p
+)

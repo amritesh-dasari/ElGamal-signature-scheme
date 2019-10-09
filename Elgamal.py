@@ -42,35 +42,28 @@ class verify:
 		self.m=d
 		self.r=e
 		self.s=f
-	def v1(self,b,c,d,e):
-		a=int(((math.pow(b,c))*(math.pow(d,e))))
-		if(a<math.pow(2,36)-1):
-			return a%self.p
-		else:
-			return (self.v1(b,c/2,d,e/2)*self.v1(b,c-c/2,d,e-e/2))%self.p
+	def v1(self,b,c,d):
+		a=int(((b**c)*(c**d))%self.p)
+		return a
 	def v2(self,b,c):
-		a=(math.pow(b,c))
-		if(a<math.pow(2,36)-1):
-			return a%self.p
-		else:
-			return (self.v2(b,c/2)*self.v2(b,c-c/2))%self.p
+		a=int((b**c)%self.p)
+		return a
 	def verified(self):
-		if(self.v1(self.beta,self.r,self.r,self.s)==self.v2(self.alpha,self.m)):
+		if(self.v1(self.beta,self.r,self.s)==self.v2(self.alpha,self.m)):
 			print("Signature verified using ElGamal.")
-			print("The value of v1 mod p: ",self.v1(self.beta,self.r,self.r,self.s))
-			print("The value of v2 mod p: ",self.v2(self.alpha,self.m))
+			print("The value of v1 mod p: "+str(self.v1(self.beta,self.r,self.s)))
+			print("The value of v2 mod p: "+str(self.v2(self.alpha,self.m)))
 		else:
 			print("Signature missmatch")
-			print("The value of v1 mod p: ",self.v1(self.beta,self.r,self.r,self.s))
-			print("The value of v2 mod p: ",self.v2(self.alpha,self.m))
-		print self.p, self.alpha, self.beta, self.m, self.r, self.s
-		print 
-
+			print("The value of v1 mod p: "+str(self.v1(self.beta,self.r,self.s)))
+			print("The value of v2 mod p: "+str(self.v2(self.alpha,self.m)))
+                                                            
 p=input("Enter the value of p : ")
 alpha=input("Enter the value of alpha : ")
 m=input("Enter the value of m : ")
 k=input("Enter the value of k : ")
 sign=signAlgo(p,alpha,m,k)
-'''v=verify(sign.p,sign.alpha,sign.beta,sign.m,sign.r,sign.s)
-print sign.invK()
-v.verified()'''
+print
+print "Verification of Elgamal Signature"
+v=verify(sign.p,sign.alpha,sign.beta,sign.m,sign.r,sign.s)
+v.verified()

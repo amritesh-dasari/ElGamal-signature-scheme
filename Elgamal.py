@@ -9,6 +9,7 @@ class signAlgo :
         self.k=d
         self.r=self.createR()
         self.s=self.createS()
+        print "The Signed Message Triplet generated is : ("+str(self.m)+","+str(self.r)+","+str(self.s)+")"
     def gcd(self,a,b):
         if a<b:
             return gcd(self,b,a)
@@ -33,7 +34,7 @@ class signAlgo :
         a=(self.invK()*(self.m-z*self.r))%(self.p-1)
         return a
     
-'''class verify:	
+class verify:	
 	def __init__(self,a,b,c,d,e,f):
 		self.p=a
 		self.alpha=b
@@ -64,7 +65,7 @@ class signAlgo :
 			print("The value of v2 mod p: ",self.v2(self.alpha,self.m))
 		print self.p, self.alpha, self.beta, self.m, self.r, self.s
 		print 
-'''
+
 p=input("Enter the value of p : ")
 alpha=input("Enter the value of alpha : ")
 m=input("Enter the value of m : ")

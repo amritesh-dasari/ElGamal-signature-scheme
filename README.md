@@ -29,4 +29,4 @@ The verification process can then be performed by Bob using public information o
 ### Correctness
 The verification procedure works by the following argument. Assume that the signature is valid. As s ≡ k-1(m – zr) (mod p – 1), we have sk ≡ (m – zr) (mod p – 1) and hence m ≡ sk + zr (mod p – 1). Therefore by Fermat’s little theorem, that a congruence mod p – 1 in the exponent yields a congruence mod p overall, we have:
 
-v2≡(α^m)≡(α^(s*k+z*r))≡(α^(s*k))*(α^(z*r))≡(β^r)*(r^s)≡v1 (mod p)
+v2 ≡ (α^m) ≡ (α^(s*k+z*r)) ≡ (α^(s*k))*(α^(z*r)) ≡ (β^r)*(r^s) ≡ v1 (mod p)

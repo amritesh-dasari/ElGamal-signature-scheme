@@ -17,11 +17,6 @@ class signAlgo :
             return b
         else:
             return gcd(b,a%b)
-    def createK(self):
-        a=2*(self.p-1)
-        while (gcd(a,self.p-1)!=1):
-            a=math.random()*(p-1)
-        return a
     def invK(self):
         for x in range(1,self.p-1):
             if ((self.k*x)%(self.p-1)==1):

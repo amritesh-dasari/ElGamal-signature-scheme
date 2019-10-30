@@ -17,11 +17,26 @@ class signAlgo :
             return b
         else:
             return gcd(b,a%b)
+
     def invK(self):
-        for x in range(1,self.p-1):
-            if ((self.k*x)%(self.p-1)==1):
-                return x
-        return 1
+        kc=self.k
+        mc=self.p-1
+        y=0
+        x=1
+        if (mc==1):
+            return 0
+        while (kc>1):
+            quotient=kc//mc
+            temp=mc
+            mc=kc%mc
+            kc=temp
+            temp=y
+            y=x-quotient*y
+            x=temp
+        if (x<0):
+            x=x+self.p-1
+        return x
+    
     def createR(self):
         a=int((self.alpha**self.k)%self.p)
         return a
